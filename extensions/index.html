@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+                <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon-precomposed.png">
+                <title>Extensions - Plates</title>
+                <meta name="description" content="Plates is a Twig inspired, native PHP template system that brings modern template language functionality to native PHP templates.">
+                <link rel="stylesheet" href="/themes/thephpleague/thephpleague.github.com/css/all.css">
+    </head>
+<body>
+
+<section class="all_packages">
+    <a href="http://thephpleague.com/">
+        <img src="/themes/thephpleague/thephpleague.github.com/img/loep_logo.png" width="195" height="200" alt="The League of Extraordinary Packages">
+    </a>
+    <h2>Our Packages:</h2>
+    <ul>
+    </ul>
+</section>
+
+<header>
+    <a class="logo" href="/">
+                    <span class="icon">
+                <img src="/img/logo.png" width="50" height="40" alt="Plates - Native PHP Templates">
+            </span>
+                <span class="name">Plates</span>
+        <span class="tagline">Native PHP Templates</span>
+    </a>
+    <a href="http://thephpleague.com/" class="league">
+        Presented by The League of Extraordinary Packages
+    </a>
+</header>
+
+<input type="checkbox" id="menu">
+<label for="menu" onclick>
+    <div class="closed">&#9776; Menu</div>
+    <div class="open">&#9776; Hide Menu</div>
+</label>
+
+<main>
+    <menu>
+                    <h2>Getting Started</h2>
+            <ul>
+                                    <li >
+                        <a href="/">Introduction</a>
+                    </li>
+                                    <li >
+                        <a href="/simple-example/">Simple example</a>
+                    </li>
+                                    <li >
+                        <a href="/installation/">Installation</a>
+                    </li>
+                            </ul>
+                    <h2>The Engine</h2>
+            <ul>
+                                    <li >
+                        <a href="/engine/">Overview</a>
+                    </li>
+                                    <li >
+                        <a href="/engine/file-extensions/">File extensions</a>
+                    </li>
+                                    <li >
+                        <a href="/engine/folders/">Folders</a>
+                    </li>
+                            </ul>
+                    <h2>Templates</h2>
+            <ul>
+                                    <li >
+                        <a href="/templates/">Overview</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/variables/">Variables</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/nesting/">Nesting</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/layouts/">Layouts</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/sections/">Sections</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/inheritance/">Inheritance</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/syntax/">Syntax</a>
+                    </li>
+                            </ul>
+                    <h2>Extensions</h2>
+            <ul>
+                                    <li class="selected">
+                        <a href="/extensions/">Overview</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/escape/">Escape</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/batch/">Batch</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/uri/">URI</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/asset/">Asset</a>
+                    </li>
+                            </ul>
+            </menu>
+    <article>
+        <h1>Extensions</h1>
+
+<p>Creating extensions couldn’t be easier, and can really make Plates sing for your specific project. Start by creating a class with a <code>getFunctions()</code> method indicating which methods in that class are to be available within your templates as functions.</p>
+
+<h2>Simple extensions example</h2>
+
+<pre><code class="language-php">&lt;?php
+
+class ChangeCase implements \League\Plates\Extension\ExtensionInterface
+{
+    public $engine;
+    public $template;
+
+    public function getFunctions()
+    {
+        return array(
+            'uppercase' =&gt; 'uppercaseString',
+            'lowercase' =&gt; 'lowercaseString'
+        );
+    }
+
+    public function uppercaseString($var)
+    {
+        return strtoupper($var);
+    }
+
+    public function lowercaseString($var)
+    {
+        return strtolower($var);
+    }
+}
+</code></pre>
+
+<p>To use this extension in your template, call the functions you’ve made available:</p>
+
+<pre><code class="language-php">&lt;p&gt;Hello, &lt;?=$this-&gt;uppercase($this-&gt;firstname)?&gt; &lt;?=$this-&gt;lowercase($this-&gt;firstname)?&gt;.&lt;/p&gt;
+</code></pre>
+
+<h2>Single method extensions</h2>
+
+<p>Alternatively, you may choose to expose the entire extension object to the template using a single function. This can make your templates more legible and also reduce the chance of conflicts with other extensions.</p>
+
+<pre><code class="language-php">&lt;?php
+
+class ChangeCase implements \League\Plates\Extension\ExtensionInterface
+{
+    public $engine;
+    public $template;
+
+    public function getFunctions()
+    {
+        return array(
+            'case' =&gt; 'getCaseObject'
+        );
+    }
+
+    public function getCaseObject()
+    {
+        return $this;
+    }
+
+    public function upper($var)
+    {
+        return strtoupper($var);
+    }
+
+    public function lower($var)
+    {
+        return strtolower($var);
+    }
+}
+</code></pre>
+
+<p>To use this extension in your template, first call the primary function, then the secondary functions:</p>
+
+<pre><code class="language-php">&lt;p&gt;Hello, &lt;?=$this-&gt;case()-&gt;upper($this-&gt;firstname)?&gt; &lt;?=$this-&gt;case()-&gt;lower($this-&gt;firstname)?&gt;.&lt;/p&gt;
+</code></pre>
+
+<h2>Loading extensions</h2>
+
+<p>Once you’ve created an extension, load it into the <a href="/engine/">engine</a> object using the <code>loadExtension()</code> method.</p>
+
+<pre><code class="language-php">&lt;?php
+
+// Load custom extension
+$engine-&gt;loadExtension(new \ChangeCase());
+</code></pre>
+    </article>
+</main>
+
+<footer>
+    <span>&copy; Copyright The League of Extraordinary Packages.</span>
+    <span>Site design by <a href="http://reinink.ca">Jonathan Reinink</a>.</span>
+    <span>Powered by <a href="https://sculpin.io">Sculpin</a>.</span>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/themes/thephpleague/thephpleague.github.com/js/scripts.js"></script>
+<script src="/themes/thephpleague/thephpleague.github.com/js/prism.js"></script>
+
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-46050814-2');ga('send','pageview');
+    </script>
+
+</body>
+</html>

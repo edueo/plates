@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+                <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon-precomposed.png">
+                <title>Sections - Plates</title>
+                <meta name="description" content="Plates is a Twig inspired, native PHP template system that brings modern template language functionality to native PHP templates.">
+                <link rel="stylesheet" href="/themes/thephpleague/thephpleague.github.com/css/all.css">
+    </head>
+<body>
+
+<section class="all_packages">
+    <a href="http://thephpleague.com/">
+        <img src="/themes/thephpleague/thephpleague.github.com/img/loep_logo.png" width="195" height="200" alt="The League of Extraordinary Packages">
+    </a>
+    <h2>Our Packages:</h2>
+    <ul>
+    </ul>
+</section>
+
+<header>
+    <a class="logo" href="/">
+                    <span class="icon">
+                <img src="/img/logo.png" width="50" height="40" alt="Plates - Native PHP Templates">
+            </span>
+                <span class="name">Plates</span>
+        <span class="tagline">Native PHP Templates</span>
+    </a>
+    <a href="http://thephpleague.com/" class="league">
+        Presented by The League of Extraordinary Packages
+    </a>
+</header>
+
+<input type="checkbox" id="menu">
+<label for="menu" onclick>
+    <div class="closed">&#9776; Menu</div>
+    <div class="open">&#9776; Hide Menu</div>
+</label>
+
+<main>
+    <menu>
+                    <h2>Getting Started</h2>
+            <ul>
+                                    <li >
+                        <a href="/">Introduction</a>
+                    </li>
+                                    <li >
+                        <a href="/simple-example/">Simple example</a>
+                    </li>
+                                    <li >
+                        <a href="/installation/">Installation</a>
+                    </li>
+                            </ul>
+                    <h2>The Engine</h2>
+            <ul>
+                                    <li >
+                        <a href="/engine/">Overview</a>
+                    </li>
+                                    <li >
+                        <a href="/engine/file-extensions/">File extensions</a>
+                    </li>
+                                    <li >
+                        <a href="/engine/folders/">Folders</a>
+                    </li>
+                            </ul>
+                    <h2>Templates</h2>
+            <ul>
+                                    <li >
+                        <a href="/templates/">Overview</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/variables/">Variables</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/nesting/">Nesting</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/layouts/">Layouts</a>
+                    </li>
+                                    <li class="selected">
+                        <a href="/templates/sections/">Sections</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/inheritance/">Inheritance</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/syntax/">Syntax</a>
+                    </li>
+                            </ul>
+                    <h2>Extensions</h2>
+            <ul>
+                                    <li >
+                        <a href="/extensions/">Overview</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/escape/">Escape</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/batch/">Batch</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/uri/">URI</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/asset/">Asset</a>
+                    </li>
+                            </ul>
+            </menu>
+    <article>
+        <h1>Sections</h1>
+
+<p>The <code>start()</code> and <code>end()</code> functions allow you to build sections (or blocks) of content within your template, but instead of them being rendered directly, they are placed into variables for use elsewhere (ie. in your layout). You define the name of this variable in the <code>start('variable_name')</code> function.</p>
+
+<h2>Creating sections</h2>
+
+<p>In the following example, the content between the <code>start()</code> and <code>end()</code> functions will be rendered into a variable called <code>$this-&gt;content</code>.</p>
+
+<pre><code class="language-php">&lt;?php $this-&gt;start('content') ?&gt;
+
+    &lt;h1&gt;Welcome!&lt;/h1&gt;
+    &lt;p&gt;Hello &lt;?=$this-&gt;e($this-&gt;name)?&gt;&lt;/p&gt;
+
+&lt;?php $this-&gt;end() ?&gt;
+</code></pre>
+
+<h2>Accessing rendered section content</h2>
+
+<p>Access rendered section content using the variable name you assigned in the <code>start()</code> method. This variable can be accessed from the current template, nested templates and layout templates.</p>
+
+<pre><code class="language-php">&lt;?=$this-&gt;content?&gt;
+</code></pre>
+    </article>
+</main>
+
+<footer>
+    <span>&copy; Copyright The League of Extraordinary Packages.</span>
+    <span>Site design by <a href="http://reinink.ca">Jonathan Reinink</a>.</span>
+    <span>Powered by <a href="https://sculpin.io">Sculpin</a>.</span>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/themes/thephpleague/thephpleague.github.com/js/scripts.js"></script>
+<script src="/themes/thephpleague/thephpleague.github.com/js/prism.js"></script>
+
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-46050814-2');ga('send','pageview');
+    </script>
+
+</body>
+</html>

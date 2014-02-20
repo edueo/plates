@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+                <link rel="apple-touch-icon-precomposed" href="/img/apple-touch-icon-precomposed.png">
+                <title>Templates - Plates</title>
+                <meta name="description" content="Plates is a Twig inspired, native PHP template system that brings modern template language functionality to native PHP templates.">
+                <link rel="stylesheet" href="/themes/thephpleague/thephpleague.github.com/css/all.css">
+    </head>
+<body>
+
+<section class="all_packages">
+    <a href="http://thephpleague.com/">
+        <img src="/themes/thephpleague/thephpleague.github.com/img/loep_logo.png" width="195" height="200" alt="The League of Extraordinary Packages">
+    </a>
+    <h2>Our Packages:</h2>
+    <ul>
+    </ul>
+</section>
+
+<header>
+    <a class="logo" href="/">
+                    <span class="icon">
+                <img src="/img/logo.png" width="50" height="40" alt="Plates - Native PHP Templates">
+            </span>
+                <span class="name">Plates</span>
+        <span class="tagline">Native PHP Templates</span>
+    </a>
+    <a href="http://thephpleague.com/" class="league">
+        Presented by The League of Extraordinary Packages
+    </a>
+</header>
+
+<input type="checkbox" id="menu">
+<label for="menu" onclick>
+    <div class="closed">&#9776; Menu</div>
+    <div class="open">&#9776; Hide Menu</div>
+</label>
+
+<main>
+    <menu>
+                    <h2>Getting Started</h2>
+            <ul>
+                                    <li >
+                        <a href="/">Introduction</a>
+                    </li>
+                                    <li >
+                        <a href="/simple-example/">Simple example</a>
+                    </li>
+                                    <li >
+                        <a href="/installation/">Installation</a>
+                    </li>
+                            </ul>
+                    <h2>The Engine</h2>
+            <ul>
+                                    <li >
+                        <a href="/engine/">Overview</a>
+                    </li>
+                                    <li >
+                        <a href="/engine/file-extensions/">File extensions</a>
+                    </li>
+                                    <li >
+                        <a href="/engine/folders/">Folders</a>
+                    </li>
+                            </ul>
+                    <h2>Templates</h2>
+            <ul>
+                                    <li class="selected">
+                        <a href="/templates/">Overview</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/variables/">Variables</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/nesting/">Nesting</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/layouts/">Layouts</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/sections/">Sections</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/inheritance/">Inheritance</a>
+                    </li>
+                                    <li >
+                        <a href="/templates/syntax/">Syntax</a>
+                    </li>
+                            </ul>
+                    <h2>Extensions</h2>
+            <ul>
+                                    <li >
+                        <a href="/extensions/">Overview</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/escape/">Escape</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/batch/">Batch</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/uri/">URI</a>
+                    </li>
+                                    <li >
+                        <a href="/extensions/asset/">Asset</a>
+                    </li>
+                            </ul>
+            </menu>
+    <article>
+        <h1>Templates</h1>
+
+<p>Plates templates are very simple PHP objects. As a result, all <a href="/templates/variables/">variables</a> and functions are accessed through the <code>$this</code> pseudo-variable. The only dependency they require is an instance of the <a href="/engine/">engine</a> object.</p>
+
+<h2>Basic usage</h2>
+
+<pre><code class="language-php">&lt;?php
+
+// Create a new template
+$template = new \League\Plates\Template($engine);
+
+// Assign a variable to the template
+$template-&gt;name = 'Jonathan';
+
+// Render the template
+echo $template-&gt;render('home');
+
+// Render a folder template
+$email = $template-&gt;render('emails::welcome');
+</code></pre>
+
+<h2>Template factory</h2>
+
+<p>Instead of manually instantiating templates, you can also use the engine’s <code>makeTemplate()</code> factory method. This approach makes it easy to use dependency injection to inject the engine into other objects and then create new templates. This in turn makes these objects easier to test and mock.</p>
+
+<pre><code class="language-php">&lt;?php
+
+// Create a new template
+$template = $engine-&gt;makeTemplate();
+</code></pre>
+
+<h2>Checking if a template exists</h2>
+
+<p>When dynamically loading templates, you may need to check if a template exists. This can be done using the engine’s <code>pathExists()</code> method.</p>
+
+<pre><code class="language-php">&lt;?php
+
+if ($engine-&gt;pathExists('articles::beginners_guide')) {
+    // It exists!
+}
+</code></pre>
+    </article>
+</main>
+
+<footer>
+    <span>&copy; Copyright The League of Extraordinary Packages.</span>
+    <span>Site design by <a href="http://reinink.ca">Jonathan Reinink</a>.</span>
+    <span>Powered by <a href="https://sculpin.io">Sculpin</a>.</span>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/themes/thephpleague/thephpleague.github.com/js/scripts.js"></script>
+<script src="/themes/thephpleague/thephpleague.github.com/js/prism.js"></script>
+
+    <script>
+        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+        ga('create','UA-46050814-2');ga('send','pageview');
+    </script>
+
+</body>
+</html>
